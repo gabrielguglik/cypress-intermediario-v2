@@ -38,3 +38,17 @@ Cypress.Commands.add("api_delete_projects", () => {
         }))
     );
 });
+
+Cypress.Commands.add("api_create_issue", issue_infos => {
+    cy.api_create_blank_project(issue_infos.project_infos).then(res =>
+        cy.request({
+            method: 'POST',
+            url: `/api/v4/projects/${res.body.id}/issues`,
+            body: {
+                title: issue_infos.title,
+                description: issue_infos.description,
+            },
+            headers: { Authorization: accessToken }
+        })
+    );
+});
