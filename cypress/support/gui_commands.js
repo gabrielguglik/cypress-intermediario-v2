@@ -93,3 +93,44 @@ Cypress.Commands.add("gui_create_issue", issue => {
 
     gui_create_issue();
 });
+
+Cypress.Commands.add("gui_create_label", issue_infos => {
+    const gui_create_label = () => {
+        cy.visit(`${Cypress.config('baseUrl')}/${Cypress.env('user_name')}/${issue_infos.project_infos.name}/-/labels`);
+        
+        cy.get("#new_label_link")
+            .should("be.visible")
+            .click();
+        cy.get("#label_title")
+            .should("be.visible")
+            .click()
+            .type(issue_infos.label_infos.title);
+        cy.get("#label_description")
+            .should("be.visible")
+            .click()
+            .type(issue_infos.label_infos.description);
+        cy.get(".form-actions > .btn-success")
+            .should("be.visible")
+            .click();
+    }
+
+    gui_create_label();
+});
+
+Cypress.Commands.add("gui_set_label", issue_infos => {
+    const gui_set_label = () => {
+        cy.visit(`${Cypress.config('baseUrl')}/${Cypress.env('user_name')}/${issue_infos.project_infos.name}/issues/1`);
+        
+        cy.get(".labels > .title > .js-sidebar-dropdown-toggle")
+            .should("be.visible")
+            .click();
+        cy.get(".label-item")
+            .should("be.visible")
+            .click();
+        cy.get(".labels > .title > .js-sidebar-dropdown-toggle")
+            .should("be.visible")
+            .click();
+    }
+
+    gui_set_label();
+});

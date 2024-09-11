@@ -14,5 +14,5 @@ describe("Create a project", () => {
         
         cy.url().should("be.equal", `${Cypress.config('baseUrl')}/${Cypress.env('user_name')}/${project_infos.name}`);
     });
-  });
+});
   
