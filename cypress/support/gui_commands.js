@@ -134,3 +134,22 @@ Cypress.Commands.add("gui_set_label", issue_infos => {
 
     gui_set_label();
 });
+
+Cypress.Commands.add("gui_create_milestone", issue_infos => {
+    const gui_create_milestone = () => {
+        cy.visit(`${Cypress.config('baseUrl')}/${Cypress.env('user_name')}/${issue_infos.project_infos.name}/-/milestones`);
+        
+        cy.get(".qa-new-project-milestone")
+            .should("be.visible")
+            .click();
+        cy.get("#milestone_title")
+            .should("be.visible")
+            .click()
+            .type(issue_infos.milestone_infos.title);
+        cy.get(".qa-milestone-create-button")
+            .should("be.visible")
+            .click();
+    }
+
+    gui_create_milestone();
+});
