@@ -27,7 +27,7 @@ describe("Set a label for an issue", () => {
     it("successfully setting a label for an issue", () => {
         cy.gui_set_label(issue_infos);
 
-        cy.get('.qa-labels-block').should('contain', issue_infos.label_infos.title)
-        cy.get('.qa-labels-block span').should('have.attr', 'style', `background-color: ${issue_infos.label_infos.color}; color: #FFFFFF;`)
+        cy.get(".qa-labels-block").should("contain", issue_infos.label_infos.title)
+        cy.get(".qa-labels-block span").should("have.attr", "style", `background-color: ${issue_infos.label_infos.color}; color: #FFFFFF;`)
     });
 });
