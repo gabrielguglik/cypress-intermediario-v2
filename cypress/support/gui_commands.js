@@ -153,3 +153,16 @@ Cypress.Commands.add("gui_create_milestone", issue_infos => {
 
     gui_create_milestone();
 });
+
+Cypress.Commands.add("gui_set_milestone", issue_infos => {
+    const gui_set_milestone = () => {
+        cy.visit(`${Cypress.config('baseUrl')}/${Cypress.env('user_name')}/${issue_infos.project_infos.name}/issues/1`);
+        
+        cy.get(".milestone > .title > .js-sidebar-dropdown-toggle")
+            .should("be.visible")
+            .click();
+        cy.contains(issue_infos.milestone_infos.title).click();
+    }
+
+    gui_set_milestone();
+});
