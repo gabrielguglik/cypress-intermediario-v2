@@ -18,7 +18,7 @@ describe("Set a milestone for an issue", () => {
         cy.api_delete_projects();
         cy.login();
         cy.api_create_issue(issue_infos).then(res =>
-            cy.api_create_milestone(issue_infos, res.body.id)
+            cy.api_create_milestone(issue_infos, res.body.project_id)
         );
     });
 
