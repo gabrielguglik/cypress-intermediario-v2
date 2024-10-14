@@ -15,8 +15,8 @@ describe("Create a milestone for an issue", () => {
 
     beforeEach(() => {
         cy.visit("/");
-        cy.api_delete_projects();
         cy.login();
+        cy.api_delete_projects();
         cy.api_create_issue(issue_infos);
     });
 

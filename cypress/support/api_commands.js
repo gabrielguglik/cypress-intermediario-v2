@@ -4,11 +4,11 @@ Cypress.Commands.add("api_create_blank_project", project_infos => {
     const api_create_blank_project = () => {
         cy.request({
             method: 'POST',
-            url: '/api/v4/projects/',
+            url: '/api/v4/projects',
             body: {
                 name: project_infos.name,
                 description: project_infos.description,
-                initialize_with_readme: project_infos.initialize_with_readme
+                initialize_with_readme: true
             },
             headers: { Authorization: accessToken }
         });
@@ -40,17 +40,18 @@ Cypress.Commands.add("api_delete_projects", () => {
 });
 
 Cypress.Commands.add("api_create_issue", issue_infos => {
-    cy.api_create_blank_project(issue_infos.project_infos).then(res =>
-        cy.request({
-            method: 'POST',
-            url: `/api/v4/projects/${res.body.id}/issues`,
-            body: {
-                title: issue_infos.title,
-                description: issue_infos.description,
-            },
-            headers: { Authorization: accessToken }
-        })
-    );
+    cy.log(issue_infos);
+    cy.api_create_blank_project(issue_infos.project_infos).then(res => {
+      cy.request({
+        method: 'POST',
+        url: `/api/v4/projects/${res.body.id}/issues`,
+        body: {
+          title: issue_infos.title,
+          description: issue_infos.description,
+        },
+        headers: { Authorization: accessToken }
+      });
+    });
 });
 
 Cypress.Commands.add("api_create_label", (issue_infos, project_id) => {
@@ -61,7 +62,7 @@ Cypress.Commands.add("api_create_label", (issue_infos, project_id) => {
             name: issue_infos.label_infos.title,
             color: issue_infos.label_infos.color,
         },
-        headers: { Authorization: accessToken }
+            headers: { Authorization: accessToken }
     });
 });
 

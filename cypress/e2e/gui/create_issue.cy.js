@@ -12,8 +12,8 @@ describe("Create an issue for a project", () => {
 
     beforeEach(() => {
         cy.visit("/");
-        cy.api_delete_projects();
         cy.login();
+        cy.api_delete_projects();
         cy.api_create_blank_project(issue_infos.project_infos);
     });
 
@@ -23,5 +23,5 @@ describe("Create an issue for a project", () => {
         cy.get(".detail-page-description")
             .should("contain", issue_infos.title)
             .and("contain", issue_infos.description);
-    });
+     });
 });
